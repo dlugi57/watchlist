@@ -15,6 +15,10 @@ public class WatchlistItem {
         this.id = id;
     }
 
+    public WatchlistItem() {
+
+    }
+
     public String getTitle() {
         return title;
     }
