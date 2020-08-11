@@ -1,6 +1,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://thymeleaf.org">
 
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width = device-width, initial-scale = 1, shrink-to-fit = no">
@@ -49,7 +50,7 @@
                 <input id="title" th:field="*{title}" type="text" class="form-control" placeholder="Mandatory">
             </div>
             <div class="col-sm-4">
-                <span class="text-danger"> </span>
+                <span class="text-danger" th:errors="*{title}"> </span>
             </div>
         </div>
 
@@ -59,7 +60,7 @@
                 <input id="rating" th:field="*{rating}" type="text" class="form-control" placeholder="5.0 < Number < 10.0">
             </div>
             <div class="col-sm-4">
-                <span class="text-danger"> </span>
+                <span class="text-danger" th:errors="*{rating}">> </span>
             </div>
         </div>
 
@@ -69,7 +70,7 @@
                 <input id="priority" th:field="*{priority}" type="text" class="form-control" placeholder="Low|Medium|High">
             </div>
             <div class="col-sm-4">
-                <span class="text-danger"> </span>
+                <span class="text-danger" th:errors="*{priority}"> </span>
             </div>
         </div>
 
@@ -79,7 +80,7 @@
                 <textarea id="comments" th:field="*{comment}" class="form-control" rows="3" placeholder="Max. 50 chars"></textarea>
             </div>
             <div class="col-sm-4">
-                <span class="text-danger"> </span>
+                <span class="text-danger" th:errors="*{comment}"> </span>
             </div>
         </div>
 
