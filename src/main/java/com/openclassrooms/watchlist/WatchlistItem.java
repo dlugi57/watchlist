@@ -2,7 +2,8 @@ package com.openclassrooms.watchlist;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-
+@BadMovie
+@GoodMovie
 public class WatchlistItem {
     @NotBlank( message="Please enter the title")
     private String title;

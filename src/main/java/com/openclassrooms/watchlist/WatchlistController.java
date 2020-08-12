@@ -47,24 +47,35 @@ public class WatchlistController {
     @PostMapping("/watchlistItemForm")
     public ModelAndView submitWatchlistItemForm(@Valid WatchlistItem watchlistItem, BindingResult bindingResult) {
 
-        if(bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             return new ModelAndView("watchlistItemForm");
         }
 
         WatchlistItem existingItem = findWatchlistItemById(watchlistItem.getId());
 
 
+        if (existingItem == null) {
 
-        if (existingItem == null){
+            if (itemAlreadyExists(watchlistItem.getTitle())) {
+                bindingResult.rejectValue("title", "", "This movie is already on your watchlist");
+                return new ModelAndView("watchlistItemForm");
+            }
+
+            if (toMuchItemsInList()) {
+                bindingResult.rejectValue(null, "", "You added to much movies to your list please start to watching lazy bustard");
+                return new ModelAndView("watchlistItemForm");
+            }
+
+
+
             watchlistItem.setId(index++);
             watchlistItems.add(watchlistItem);
-        }else{
+        } else {
             existingItem.setComment(watchlistItem.getComment());
             existingItem.setPriority(watchlistItem.getPriority());
             existingItem.setRating(watchlistItem.getRating());
             existingItem.setTitle(watchlistItem.getTitle());
         }
-
 
 
         RedirectView redirect = new RedirectView();
@@ -85,6 +96,24 @@ public class WatchlistController {
         model.put("numberOfMovies", watchlistItems.size());
 
         return new ModelAndView(viewName, model);
+    }
+
+    private boolean itemAlreadyExists(String title) {
+
+        for (WatchlistItem watchlistItem : watchlistItems) {
+            if (watchlistItem.getTitle().equals(title)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean toMuchItemsInList() {
+
+        if (watchlistItems.size() > 2) {
+            return true;
+        }
+        return false;
     }
 
 
