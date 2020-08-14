@@ -1,4 +1,4 @@
-package com.openclassrooms.watchlist;
+package com.openclassrooms.watchlist.validation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -11,10 +11,10 @@ import java.lang.annotation.RetentionPolicy;
 
 @Target ({ElementType.FIELD})
 @Retention (RetentionPolicy.RUNTIME)
-@Constraint (validatedBy= PriorityValidator.class)
-public @interface Priority {
+@Constraint (validatedBy= RatingValidator.class)
+public @interface Rating {
 
-    String message() default "Please enter M,L or H for priority";
+    String message() default "Rating should be a number between 1-10";
 
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
