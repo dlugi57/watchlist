@@ -2,7 +2,7 @@ package com.openclassrooms.watchlist;
 
 import com.openclassrooms.watchlist.domain.WatchlistItem;
 import com.openclassrooms.watchlist.repository.WatchListRepository;
-import com.openclassrooms.watchlist.service.MovieRatingService;
+import com.openclassrooms.watchlist.service.MovieRatingServiceImpl;
 import com.openclassrooms.watchlist.service.WatchlistService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,7 +22,7 @@ public class WatchlistServiceTest {
     @Mock
     private WatchListRepository watchlistRepositoryMock;
     @Mock
-    private MovieRatingService movieRatingServiceMock;
+    private MovieRatingServiceImpl movieRatingServiceImplMock;
 
     @InjectMocks
     WatchlistService watchlistService;
@@ -55,7 +55,7 @@ public class WatchlistServiceTest {
         List<WatchlistItem> mockItems = Arrays.asList(item1);
 
         when(watchlistRepositoryMock.getList()).thenReturn(mockItems);
-        when(movieRatingServiceMock.getMovieRating(any(String.class))).thenReturn("10");
+        when(movieRatingServiceImplMock.getMovieRating(any(String.class))).thenReturn("10");
 
         //Act
         List<WatchlistItem> result = watchlistService.getWatchlistItems();
